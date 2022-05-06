@@ -1,4 +1,4 @@
-namespace ConferencePlanner.GraphQL.Contracts.Inputs;
+namespace ConferencePlanner.GraphQL.Speakers;
 
 public record AddSpeakerInput(
     string Name,

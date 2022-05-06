@@ -11,7 +11,7 @@ namespace GraphQL.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     [Migration("20220506102232_addNullTypes")]
-    partial class addNullTypes
+    partial class AddNullTypes
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

@@ -2,27 +2,29 @@ using Microsoft.EntityFrameworkCore;
 using ConferencePlanner.GraphQL.Data;
 using ConferencePlanner.GraphQL.DataLoader;
 
-#pragma warning disable 
-
 namespace ConferencePlanner.GraphQL.Types;
 
-public class SpeakerType : ObjectType<Speaker>
+#pragma warning disable 
+
+public class AttendeeType : ObjectType<Attendee>
 {
-    protected override void Configure(IObjectTypeDescriptor<Speaker> descriptor)
+    protected override void Configure(IObjectTypeDescriptor<Attendee> descriptor)
     {
         descriptor
             .ImplementsNode()
             .IdField(t => t.Id)
-            .ResolveNode(async (ctx, id) => await ctx.DataLoader<SpeakerByIdDataLoader>().LoadAsync(id, ctx.RequestAborted));
+            .ResolveNode(async (ctx, id) => await ctx.DataLoader<AttendeeByIdDataLoader>().LoadAsync(id, ctx.RequestAborted));
 
         descriptor
-            .Field(sp => sp.Sessions)
-            .ResolveWith<SpeakerResolvers>(t => t.GetSessionsAsync(default!, default!, default!, default))
+            .Field(t => t.Sessions)
+            .ResolveWith<AttendeeResolvers>(t => t.GetSessionsAsync(default!, default!, default!, default))
             .UseDbContext<ApplicationDbContext>()
             .Name("sessions");
     }
 
-    private class SpeakerResolvers
+    // It is has no sense because configuration of 
+    // our db models supoort it out of the box 
+    private class AttendeeResolvers
     {
         public async Task<IEnumerable<Session>> GetSessionsAsync(
             Speaker speaker,

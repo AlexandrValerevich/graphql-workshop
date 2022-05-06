@@ -4,7 +4,7 @@
 
 namespace GraphQL.Migrations
 {
-    public partial class addNullTypes : Migration
+    public partial class AddNullTypes : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

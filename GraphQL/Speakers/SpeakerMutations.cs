@@ -1,13 +1,13 @@
-using ConferencePlanner.GraphQL.Contracts.Inputs;
-using ConferencePlanner.GraphQL.Contracts.Payload;
 using ConferencePlanner.GraphQL.Data;
 
-namespace ConferencePlanner.GraphQL;
+namespace ConferencePlanner.GraphQL.Speakers;
 
-public class Mutation
+
+[ExtendObjectType("Mutation")]
+public class SpeakerMutations
 {
     [UseApplicationDbContext]
-    public async Task<AddSpeakerPayload> AddSpeakerAsync(
+    public async Task<SpeakerPayloadBase> AddSpeakerAsync(
         AddSpeakerInput input,
         [ScopedService] ApplicationDbContext context)
     {

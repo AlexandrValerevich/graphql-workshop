@@ -3,6 +3,9 @@ using ConferencePlanner.GraphQL.Data;
 using ConferencePlanner.GraphQL.DataLoader;
 using ConferencePlanner.GraphQL.Types;
 using Microsoft.EntityFrameworkCore;
+using ConferencePlanner.GraphQL.Speakers;
+using ConferencePlanner.GraphQL.Sessions;
+using ConferencePlanner.GraphQL.Tracks;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,11 +13,19 @@ builder.Services.AddPooledDbContextFactory<ApplicationDbContext>(options => opti
 
 builder.Services
     .AddGraphQLServer()
-    .AddQueryType<Query>()
-    .AddMutationType<Mutation>()
-    .AddType<SpeakerType>()
-    .AddDataLoader<SpeakerByIdDataLoader>()
-    .AddDataLoader<SessionByIdDataLoader>();
+    .EnableRelaySupport()
+    .AddQueryType(d => d.Name("Query"))
+        .AddTypeExtension<SessionQueries>()
+        .AddTypeExtension<SpeakerQueries>()
+        .AddTypeExtension<TrackQueries>()
+     .AddMutationType(d => d.Name("Mutation"))
+        .AddTypeExtension<SessionMutations>()
+        .AddTypeExtension<SpeakerMutations>()
+        .AddTypeExtension<TrackMutations>()
+     .AddType<AttendeeType>()
+     .AddType<SessionType>()
+     .AddType<SpeakerType>()
+     .AddType<TrackType>();
 
 var app = builder.Build();
 
