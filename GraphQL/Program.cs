@@ -1,6 +1,4 @@
-using ConferencePlanner.GraphQL;
 using ConferencePlanner.GraphQL.Data;
-using ConferencePlanner.GraphQL.DataLoader;
 using ConferencePlanner.GraphQL.Types;
 using Microsoft.EntityFrameworkCore;
 using ConferencePlanner.GraphQL.Speakers;
